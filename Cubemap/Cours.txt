@@ -1,0 +1,14 @@
+glEnable(GL_DEPTH_TEST)
+glDepthFunc(GL_LESS) //	La fonction de comparaison du depth test
+
+Par default, la fonction de test est inferieur strict (less)
+
+glDepthFunc(GL_LEQUAL)
+//	GL_LEQUAL important pour unr cubemap "infinie"
+//	car la cubemap est projetee sur le plan FAR
+//	A supposer qu'on ait un object au niveau du plan FAR
+//	On risque le z-fight avec la skybox en mode  GL_LESS
+
+glDepthMast(false)
+drawCubeMap
+glDepthMask(true)
