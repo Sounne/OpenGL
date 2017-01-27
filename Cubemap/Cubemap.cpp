@@ -13,7 +13,9 @@
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
+#include "SOIL/src/SOIL.h"
 #include "dds.h"
+#include "Skybox.h"
 
 void Initialize()
 {
@@ -32,37 +34,34 @@ void Render()
 
 void Resize(int, int ) {}
 
-int main(int argc, char* argv[])
+auto Look() -> void
 {
-	glutInit(&argc, argv);
-	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(1280, 720);
-
-	glutCreateWindow("Compression Image");
-	glutInitDisplayMode(GL_RGBA | GL_DOUBLE);
-	
-	Initialize();
-
-	GLuint texture_id;
-	glGenTextures(1, &texture_id);
-
-	glBindTexture(GL_TEXTURE_2D, texture_id);
-
-	uint8_t  * output;
-	uint32_t width = 512;
-	uint32_t height = 512;
-
-	uint32_t image_size = LoadImageDDS(&output, width, height, "mario.dds");
-	//glCompressedTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGB_S3TC_DXT1_EXT, width, height, 0, image_size, &output);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//LoadDDS("mario.dds");
-
-	//FreeImageDDS(&output);
-
 	glutReshapeFunc(Resize);
 	glutIdleFunc(Update);
 	glutDisplayFunc(Render);
 	glutMainLoop();
+}
+
+int main(int argc, char* argv[])
+{
+	glewInit();
+	glutInit(&argc, argv);
+	int width = 1280, height = 720;
+	glutInitWindowPosition(100, 100);
+	glutInitWindowSize(1280, 720);
+	glutCreateWindow("Cubemap");
+	glutInitDisplayMode(GL_RGBA | GL_DOUBLE);
+
+	GLuint texture_id;
+	glGenTextures(1, &texture_id);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texture_id);
+
+	//unsigned char * top = SOIL_load_image("Skybox/top.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	//unsigned char * bot = SOIL_load_image("Skybox/bottom.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	//unsigned char * front = SOIL_load_image("Skybox/front.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	//unsigned char * back = SOIL_load_image("Skybox/back.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	//unsigned char * left = SOIL_load_image("Skybox/left.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	//unsigned char * right = SOIL_load_image("Skybox/right.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
 
 	return 1;
 }
