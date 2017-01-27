@@ -1,0 +1,33 @@
+Alignement natyreul des structures : 4 octets
+
+struct Text32
+{
+	int i;	//	0
+	char c	//	4	1 octet + 3 octets de padding (bourrage)
+	float f;	//	8
+	short s;	//	12	2 octets + 2 octets de padding
+};
+
+struct Text64
+{
+	int i;	//	0
+	char c	//	4	1 octet + 3 octets de padding (bourrage)
+	float f;	//	8
+	short s;	//	12	2 octets + 2 octets de padding
+};
+
+struct Text64
+{
+	float f;	//	offset 0
+	int i;	//	offset 4
+	shirt s;	//	2 octets + 2 octets de libre
+	char c;	//	//	offset 10	1 octet + 1 octet de libre
+};
+
+#pragma push(pack, 1)
+struct Text
+{
+	//	...
+}
+#pragma pop()
+
