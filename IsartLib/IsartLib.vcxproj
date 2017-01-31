@@ -142,11 +142,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\GLShader.cpp" />
+    <ClCompile Include="..\common\Vec3.cpp" />
+    <ClCompile Include="..\common\Vec4.cpp" />
     <ClCompile Include="dds.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\GLShader.h" />
     <ClInclude Include="..\common\mat4.h" />
+    <ClInclude Include="..\common\Vec3.h" />
+    <ClInclude Include="..\common\Vec4.h" />
     <ClInclude Include="dds.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
