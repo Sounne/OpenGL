@@ -18,7 +18,7 @@ auto ParticleSystem::Emit(uint32_t _count) -> void
 		glUniformBlockBinding(program, block_index, binding_point);
 		glGenBuffers(1, &this->m_GPUStorage.VAO);
 
-		if (this->back_end == PARTICULE_BACK_END::CPU)
+		if (this->back_end == PARTICLE_BACK_END::CPU)
 		{
 			glBindVertexArray(this->m_GPUStorage.VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, this->m_GPUStorage.VBO);
@@ -27,9 +27,9 @@ auto ParticleSystem::Emit(uint32_t _count) -> void
 			glEnableVertexAttribArray(0);
 		}
 
-		if (this->back_end == PARTICULE_BACK_END::CPU)
+		if (this->back_end == PARTICLE_BACK_END::CPU)
 		{
-			Particule particule;
+			Particle particule;
 
 			float randx = (rand() / (float)RAND_MAX*30.f - 15.f);
 			float randy = (rand() / (float)RAND_MAX * 5.f - 2.5f);
@@ -62,7 +62,7 @@ auto ParticleSystem::Update(float _deltatime) -> void
 
 	for (auto index = 0; index < this->m_particule.size(); ++index)
 	{
-		Particule & particule = this->m_particule[index];
+		Particle & particule = this->m_particule[index];
 		particule.position += particule.velocity * _deltatime + acceleration_2;
 		particule.velocity += acceletation;
 
@@ -75,7 +75,7 @@ auto ParticleSystem::Render() -> void
 {
 	//this->m_particule.Bind();
 
-	if (this->back_end == PARTICULE_BACK_END::CPU)
+	if (this->back_end == PARTICLE_BACK_END::CPU)
 	{
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, this->m_GPUStorage.VBO);

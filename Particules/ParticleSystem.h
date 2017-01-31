@@ -15,7 +15,7 @@ struct Obstacle
 	float radius;
 };
 
-struct Particule
+struct Particle
 {
 	Vec3 position;
 	Vec3 velocity;
@@ -28,18 +28,35 @@ struct ParticleSystem
 	Vec3 velocity;
 	Vec3 color;
 	GLShader m_particuleshader;
+	GLShader m_TransformShader;
+	GLShader m_ComputeShader;
+
+	struct GPUParticleData
+	{
+		uint32_t VBO;
+	};
+
+	struct GPUParticleLayout
+	{
+		uint32_t VAO;
+	};
+
+	//m_GPUStorage m_GPUStorage;
+	uint32_t m_RenderVAO;
+	uint32_t m_TransformVAO;
 
 	struct GPUParticuleSystem
 	{
 		uint32_t VAO;
-		uint32_t VBO;
+		uint32_t VBO[2];
 
 	} m_GPUStorage;
-	
-	std::vector<Particule> m_particule;
+
+	std::vector<Particle> m_particule;
 	std::vector<Obstacle> m_obstacle;
 	int back_end;
 	int m_count;
+	int m_CurrentSource;
 	float previous_time = 0.f;
 	bool g_candraw = false;
 
@@ -49,7 +66,7 @@ struct ParticleSystem
 	auto Render() -> void;
 };
 
-enum PARTICULE_BACK_END
+enum PARTICLE_BACK_END
 {
 	CPU = 0,
 	TRANSFORM_FEEDBACK,

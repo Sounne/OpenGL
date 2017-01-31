@@ -15,7 +15,7 @@ struct Obstacle
 	float radius;
 };
 
-struct Particule
+struct Particle
 {
 	auto Bind() -> int;
 
@@ -38,7 +38,7 @@ struct ParticleSystem
 
 	} m_GPUStorage;
 	
-	std::vector<Particule> m_particule;
+	std::vector<Particle> m_particule;
 	std::vector<Obstacle> m_obstacle;
 	int back_end;
 	int m_count;
@@ -51,7 +51,7 @@ struct ParticleSystem
 	auto Render() -> void;
 };
 
-enum PARTICULE_BACK_END
+enum PARTICLE_BACK_END
 {
 	CPU = 0,
 	TRANSFORM_FEEDBACK,
