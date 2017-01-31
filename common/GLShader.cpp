@@ -68,6 +68,10 @@ bool GLShader::Create()
 	// checker le resultat du linkage
 	int linkSuccess = 0;
 	glGetProgramiv(_Program, GL_LINK_STATUS, &linkSuccess);
+
+	//if (!this->LinkCallback)
+	//	this->LinkCallback(this->_Program);
+
 	if (!linkSuccess)
 	{
 		char errorBuffer[4096];
@@ -78,6 +82,7 @@ bool GLShader::Create()
 			<< errorBuffer << std::endl;
 		return false;
 	}
+
 	return true;
 }
 

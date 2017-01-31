@@ -1,0 +1,3 @@
+layout (location = 0) -> fait la meme chose que glBindAttribLocation()
+
+ATTENTION !	Necessite la presence de l'extension GL_ARB_explicit_attrib_location : enable

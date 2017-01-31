@@ -37,9 +37,6 @@ uint32_t LoadImageDDS(uint8_t **output, uint32_t &width, uint32_t &height, const
 
 void FreeImageDDS(uint8_t **output)
 {
-	if (!*output)
-		return;
-
 	delete[] *output;
 	*output = nullptr;
 }

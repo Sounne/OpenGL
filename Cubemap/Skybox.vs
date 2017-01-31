@@ -1,21 +1,17 @@
-in vec4 a_Position;
+#version 330 core
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec3 normal;
 
-void main(void)
+out vec3 Normal;
+out vec3 Position;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
 {
-	gl_Position = ProjectionMatrix * ViewMatrix * vec4(a_Position.xyz, 0.0);
-}
-
-//	out vec4 gl_Position -> Rasterizer
-
-[Vertex Shader] //	Vertex en 4D
-	|
-[Perspective Divide] //	Vertex en 3D
-	|
-	Position3D = gl_Position3D.xyz /	Position3D.w
-	Positon3DCubeMap = gl_Position.xyww -> z = w -> x,y,1.0
-	|
-[Primitive Assembly]	//	SI GL_TRIANGLES, on attends 3 vertex
-	|
-	Position2D = Position3D.xy / Position3D.z
-	|
-[Rasterizer]
+    gl_Position = projection * view * model * vec4(position, 1.0f);
+    Normal = mat3(transpose(inverse(model))) * normal;
+    Position = vec3(model * vec4(position, 1.0f));
+} 

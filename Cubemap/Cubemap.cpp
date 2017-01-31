@@ -4,6 +4,8 @@
 #if _WIN32
 #define FREEGLUT_LIB_PRAGMAS	1
 #define _CRT_SECURE_NO_WARNINGS
+#define STB_IMAGE_IMPLEMENTATION
+
 #pragma comment (lib, "freeglut.lib")
 #pragma comment (lib, "glew32.lib")
 #endif
@@ -13,9 +15,10 @@
 
 #include "GL/glew.h"
 #include "GL/freeglut.h"
-#include "SOIL/src/SOIL.h"
 #include "dds.h"
 #include "Skybox.h"
+#include "../common/GLShader.h"
+#include "stb/stb_image.h"
 
 void Initialize()
 {
@@ -26,7 +29,6 @@ void Update()
 {
 	glutPostRedisplay();
 }
-
 
 void Render() 
 {
@@ -42,26 +44,36 @@ auto Look() -> void
 	glutMainLoop();
 }
 
+GLShader shader;
+GLuint VAO;
+
+auto Init() -> void
+{
+	//glewInit();
+	//shader.LoadShader(GL_VERTEX_SHADER, "Skybox.vs");
+	//shader.LoadShader(GL_VERTEX_SHADER, "Skybox.vs");
+	//shader.Create();
+}
+
 int main(int argc, char* argv[])
 {
-	glewInit();
 	glutInit(&argc, argv);
 	int width = 1280, height = 720;
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(1280, 720);
 	glutCreateWindow("Cubemap");
 	glutInitDisplayMode(GL_RGBA | GL_DOUBLE);
+	glewInit();
 
-	GLuint texture_id;
-	glGenTextures(1, &texture_id);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, texture_id);
+	Skybox skybox = Skybox();
+	skybox.Init();
 
-	//unsigned char * top = SOIL_load_image("Skybox/top.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
-	//unsigned char * bot = SOIL_load_image("Skybox/bottom.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
-	//unsigned char * front = SOIL_load_image("Skybox/front.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
-	//unsigned char * back = SOIL_load_image("Skybox/back.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
-	//unsigned char * left = SOIL_load_image("Skybox/left.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
-	//unsigned char * right = SOIL_load_image("Skybox/right.jpg", &width, &height, 0, SOIL_LOAD_RGBA);
+	auto positionLocation = glGetAttribLocation(shader.Get(), "Position");
+	glVertexAttribPointer(positionLocation, 3, GL_FLOAT, false, 8 * sizeof(float), 0);
+	glEnableVertexAttribArray(positionLocation);
+
+	Look();
+	glutMainLoop();
 
 	return 1;
 }

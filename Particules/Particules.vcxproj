@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{93ACE8CB-5A62-4CFC-8421-3603928CD11C}</ProjectGuid>
+    <ProjectGuid>{9A19311B-4FFD-4A27-8991-5719E4F71849}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>basic</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -150,8 +150,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Compression.cpp" />
     <ClCompile Include="dds.cpp" />
+    <ClCompile Include="Particules.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dds.h" />
