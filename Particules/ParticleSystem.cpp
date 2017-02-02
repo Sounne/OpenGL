@@ -91,26 +91,26 @@ void ParticleTransformVarying(int program)
 
 auto ParticleSystem::Update(float _deltatime) -> void
 {
-	//auto current_time = glutGet(GLUT_ELAPSED_TIME);
-	//auto delta = current_time - this->previous_time;
-	//this->previous_time = current_time;
-	//auto elapsed_time = delta / 1000.f;
+	auto current_time = glutGet(GLUT_ELAPSED_TIME);
+	auto delta = current_time - this->previous_time;
+	this->previous_time = current_time;
+	auto elapsed_time = delta / 1000.f;
 
-	//glutPostRedisplay();
-	//this->g_candraw = true;
+	glutPostRedisplay();
+	this->g_candraw = true;
 
-	//Vec3 acceletation = { 0.9f, -9.8f, 0.f };
-	//Vec3 acceleration_2 = (acceletation * _deltatime) * 0.5f;
+	Vec3 acceletation = { 0.9f, -9.8f, 0.f };
+	Vec3 acceleration_2 = (acceletation * _deltatime) * 0.5f;
 
-	//for (auto index = 0; index < this->m_particule.size(); ++index)
-	//{
-	//	Particle & particule = this->m_particule[index];
-	//	particule.position += particule.velocity * _deltatime + acceleration_2;
-	//	particule.velocity += acceletation;
+	for (auto index = 0; index < this->m_particule.size(); ++index)
+	{
+		Particle & particule = this->m_particule[index];
+		particule.position += particule.velocity * _deltatime + acceleration_2;
+		particule.velocity += acceletation;
 
-	//	if (particule.position.y < -5.f)
-	//		particule.velocity.y = -2.0f * particule.position.y;
-	//}
+		if (particule.position.y < -5.f)
+			particule.velocity.y = -2.0f * particule.position.y;
+	}
 
 	if (back_end == PARTICLE_BACK_END::TRANSFORM_FEEDBACK)
 	{

@@ -8,8 +8,6 @@
 
 bool GLShader::LoadShader(uint32_t type, const char* path)
 {
-	// on presuppose type = GL_VERTEX_SHADER ou 
-	// GL_FRAGMENT_SHADER
 	uint32_t shaderID;
 	shaderID = glCreateShader(type);
 	switch (type) {

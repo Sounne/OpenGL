@@ -19,7 +19,6 @@ auto Skybox::Init() -> void
 	this->faces.push_back("../Skybox/top.jpg");
 	this->faces.push_back("../Skybox/left.jpg");
 	this->faces.push_back("../Skybox/right.jpg");
-	this->cube_map_texture = LoadCubeMap(1200, 720);
 }
 
 auto Skybox::LoadCubeMap(int _width, int _height) -> GLuint
